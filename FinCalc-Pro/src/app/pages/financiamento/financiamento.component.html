@@ -5,12 +5,51 @@
   <form class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" (ngSubmit)="simular()">
     <div>
       <label class="block text-sm text-gray-600 mb-1">Banco</label>
-      <select [(ngModel)]="bancoSelecionado" name="banco" (ngModelChange)="onBancoChange()" class="w-full rounded-xl border border-gray-300 px-3 py-2">
-        <option value="">Selecione um banco</option>
-        <option *ngFor="let banco of bancos" [value]="banco.nome">
-          {{ banco.nome }}{{ banco.taxa > 0 ? ' - ' + banco.taxa.toFixed(2) + '% a.a.' : '' }}
-        </option>
-      </select>
+      <div class="relative">
+        <button
+          type="button"
+          (click)="toggleDropdown()"
+          class="w-full rounded-xl border border-gray-300 px-3 py-2.5 bg-white text-left flex items-center justify-between hover:border-[#2563EB] transition-colors"
+        >
+          <div class="flex items-center gap-3">
+            <img
+              *ngIf="getBancoSelecionado()?.logo"
+              [src]="getBancoSelecionado()?.logo"
+              [alt]="bancoSelecionado"
+              class="h-6 w-auto object-contain p-1 bg-white rounded"
+            />
+            <span class="text-gray-900">{{ bancoSelecionado || 'Selecione um banco' }}</span>
+          </div>
+          <svg class="w-5 h-5 text-gray-400" [class.rotate-180]="dropdownAberto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        
+        <div
+          *ngIf="dropdownAberto"
+          class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow-lg max-h-80 overflow-auto"
+        >
+          <button
+            *ngFor="let banco of bancos"
+            type="button"
+            (click)="selecionarBanco(banco.nome)"
+            class="w-full px-3 py-3 text-left hover:bg-[#F9FAFB] flex items-center gap-3 transition-colors"
+            [class.bg-blue-50]="banco.nome === bancoSelecionado"
+          >
+            <img
+              *ngIf="banco.logo"
+              [src]="banco.logo"
+              [alt]="banco.nome"
+              class="h-6 w-auto object-contain p-1 bg-gray-50 rounded"
+              onerror="this.style.display='none'"
+            />
+            <div class="flex-1">
+              <div class="font-medium text-gray-900">{{ banco.nome }}</div>
+              <div *ngIf="banco.taxa > 0" class="text-xs text-gray-500">{{ banco.taxa.toFixed(2) }}% a.a.</div>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Taxa de Juros Anual (%)</label>
@@ -23,18 +62,24 @@
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Valor do Imóvel</label>
-      <input type="text" appCurrencyMask [(ngModel)]="valorImovel" name="valorImovel" (ngModelChange)="onValorImovelChange()" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: R$300.000,00" />
+      <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-medium">R$</span>
+        <input type="text" appCurrencyMask [(ngModel)]="valorImovel" name="valorImovel" (ngModelChange)="onValorImovelChange()" class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-2" placeholder="300.000,00" />
+      </div>
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Valor da Entrada</label>
-      <input type="text" appCurrencyMask [(ngModel)]="entrada" name="entrada" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: R$60.000,00" />
+      <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-medium">R$</span>
+        <input type="text" appCurrencyMask [(ngModel)]="entrada" name="entrada" class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-2" placeholder="60.000,00" />
+      </div>
       <div class="mt-1 text-xs text-gray-500" *ngIf="percentualEntradaMinima > 0">
         Entrada mínima: <strong class="text-[#2563EB]">{{ percentualEntradaMinima }}%</strong> ({{ entradaMinimaRecomendada | currency:'BRL':'symbol':'1.2-2':'pt-BR' }})
       </div>
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Prazo (anos)</label>
-      <input type="number" [(ngModel)]="prazoAnos" name="prazoAnos" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: 30 anos" />
+      <input type="number" [(ngModel)]="prazoAnos" name="prazoAnos" (focus)="$event.target.select()" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: 30 anos" />
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Sistema de Amortização</label>
@@ -49,19 +94,36 @@
     </div>
   </form>
 
-  <div *ngIf="resultado as r" class="grid md:grid-cols-2 gap-6">
-    <div class="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
-      <h3 class="font-semibold mb-3">Resultado</h3>
-      <ul class="space-y-2 text-gray-800">
-        <li class="flex justify-between"><span>Valor da Parcela Inicial</span><strong>{{ r.parcelaInicial }}</strong></li>
-        <li class="flex justify-between"><span>Valor da Parcela Final</span><strong>{{ r.parcelaFinal }}</strong></li>
-        <li class="flex justify-between"><span>Valor Total Pago</span><strong>{{ r.valorTotalPago }}</strong></li>
-        <li class="flex justify-between"><span>Total de Juros</span><strong>{{ r.totalJuros }}</strong></li>
+  <div *ngIf="resultado as r" class="mt-8">
+    <div class="rounded-2xl bg-white p-8 shadow-sm border border-gray-200 max-w-2xl">
+      <h3 class="text-xl font-semibold mb-6 text-[#1F2937] pb-3 border-b-2 border-gray-200">Resultado da Simulação</h3>
+      <ul class="space-y-5">
+        <li class="flex justify-between items-center py-3">
+          <span class="text-base text-gray-600">Valor da Parcela Inicial</span>
+          <strong class="text-xl text-[#1F2937]">{{ r.parcelaInicial }}</strong>
+        </li>
+        <li class="flex justify-between items-center py-3 bg-gray-50 -mx-4 px-4 rounded-lg">
+          <span class="text-base text-gray-600">Valor da Parcela Final</span>
+          <strong class="text-xl text-[#1F2937]">{{ r.parcelaFinal }}</strong>
+        </li>
+        <li class="flex justify-between items-center py-3">
+          <span class="text-base text-gray-600">Valor Total Pago</span>
+          <strong class="text-xl text-[#1F2937]">{{ r.valorTotalPago }}</strong>
+        </li>
+        <li class="flex justify-between items-center py-3 bg-gray-50 -mx-4 px-4 rounded-lg">
+          <span class="text-base text-gray-600">Total de Juros</span>
+          <strong class="text-xl text-[#1F2937]">{{ r.totalJuros }}</strong>
+        </li>
       </ul>
     </div>
-    <div class="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
-      <h3 class="font-semibold mb-3">Anúncios</h3>
-      <div class="h-40 rounded-xl border border-dashed border-gray-300 flex items-center justify-center text-gray-500">Área de anúncio (sidebar)</div>
+
+    <!-- Anúncio após resultado -->
+    <div class="mt-8 rounded-2xl bg-white p-8 shadow-sm border-2 border-dashed border-gray-300 max-w-2xl flex items-center justify-center min-h-[300px]">
+      <div class="text-center">
+        <div class="text-5xl mb-3">📢</div>
+        <p class="text-gray-500 text-lg">Espaço para Anúncio</p>
+        <p class="text-gray-400 text-sm mt-2">Após resultado da simulação</p>
+      </div>
     </div>
   </div>
 </section>

@@ -16,5 +16,15 @@ export const routes: Routes = [
 		title: 'Calculadora de CDB e Tesouro',
 		loadComponent: () => import('./pages/investimentos/investimentos.component').then(m => m.InvestimentosComponent)
 	},
+	{
+		path: 'politica-privacidade',
+		title: 'Política de Privacidade',
+		loadComponent: () => import('./pages/politica-privacidade/politica-privacidade.component').then(m => m.PoliticaPrivacidadeComponent)
+	},
+	{
+		path: 'termos-uso',
+		title: 'Termos de Uso',
+		loadComponent: () => import('./pages/termos-uso/termos-uso.component').then(m => m.TermosUsoComponent)
+	},
 	{ path: '**', redirectTo: '' }
 ];

@@ -185,8 +185,16 @@
 <div class="min-h-screen bg-[#F9FAFB] text-gray-900 flex flex-col relative">
   <app-header />
   
+  <!-- Banner Anúncio Superior (mobile + tablet) -->
+  <div class="block xl:hidden bg-white border-b-2 border-dashed border-gray-300 py-3 px-4">
+    <div class="text-center">
+      <div class="text-2xl mb-2">📢</div>
+      <p class="text-sm text-gray-400">Espaço para Anúncio</p>
+    </div>
+  </div>
+  
   <!-- Anúncio Esquerdo (fixo próximo ao container) -->
-  <aside class="hidden xl:block fixed top-36 w-[160px] z-0" style="left: max(1rem, calc(50% - 700px));">
+  <aside class="hidden xl:block fixed top-36 w-[160px] z-20" style="left: max(1rem, calc(50% - 750px));">
     <div class="bg-white border-2 border-dashed border-gray-300 rounded-xl p-4 text-center min-h-[600px] flex items-center justify-center sticky top-36">
       <div class="text-gray-400">
         <div class="text-4xl mb-2">📢</div>
@@ -196,7 +204,7 @@
   </aside>
 
   <!-- Anúncio Direito (fixo próximo ao container) -->
-  <aside class="hidden xl:block fixed top-36 w-[160px] z-0" style="right: max(1rem, calc(50% - 700px));">
+  <aside class="hidden xl:block fixed top-36 w-[160px] z-20" style="right: max(1rem, calc(50% - 750px));">
     <div class="bg-white border-2 border-dashed border-gray-300 rounded-xl p-4 text-center min-h-[600px] flex items-center justify-center sticky top-36">
       <div class="text-gray-400">
         <div class="text-4xl mb-2">📢</div>
@@ -208,6 +216,14 @@
   <main class="flex-1 container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
     <router-outlet />
   </main>
+  
+  <!-- Banner Anúncio Inferior (mobile + tablet) -->
+  <div class="block xl:hidden bg-white border-t-2 border-dashed border-gray-300 py-3 px-4 mb-4">
+    <div class="text-center">
+      <div class="text-2xl mb-2">📢</div>
+      <p class="text-sm text-gray-400">Espaço para Anúncio</p>
+    </div>
+  </div>
   
   <app-footer />
 </div>
