@@ -1,0 +1,12 @@
+# Pasta para imagens do projeto
+
+Coloque aqui:
+- Logos
+- Ícones
+- Imagens de banners
+- Outros recursos visuais
+
+Para usar as imagens no código:
+```html
+<img src="/images/seu-arquivo.png" alt="Descrição">
+```

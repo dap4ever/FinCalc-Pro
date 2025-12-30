@@ -1,0 +1,67 @@
+<section class="space-y-6">
+  <h1 class="text-2xl font-semibold text-[#1F2937]">Calculadora de Financiamento Imobiliário</h1>
+  <p class="text-gray-700">Simule parcelas, juros e valor total do financiamento</p>
+
+  <form class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" (ngSubmit)="simular()">
+    <div>
+      <label class="block text-sm text-gray-600 mb-1">Banco</label>
+      <select [(ngModel)]="bancoSelecionado" name="banco" (ngModelChange)="onBancoChange()" class="w-full rounded-xl border border-gray-300 px-3 py-2">
+        <option value="">Selecione um banco</option>
+        <option *ngFor="let banco of bancos" [value]="banco.nome">
+          {{ banco.nome }}{{ banco.taxa > 0 ? ' - ' + banco.taxa.toFixed(2) + '% a.a.' : '' }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label class="block text-sm text-gray-600 mb-1">Taxa de Juros Anual (%)</label>
+      <input type="number" step="0.01" [(ngModel)]="jurosAnual" name="jurosAnual" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: 9.5%" />
+      <div class="mt-1 text-xs text-gray-500" *ngIf="!carregandoTaxas">
+        Taxa média atual: <strong class="text-[#2563EB]">{{ taxaSugerida.toFixed(2) }}% a.a.</strong>
+        <button type="button" (click)="aplicarTaxaSugerida()" class="ml-2 text-[#2563EB] hover:underline">Aplicar</button>
+      </div>
+      <div class="mt-1 text-xs text-gray-400" *ngIf="carregandoTaxas">Carregando taxa atual...</div>
+    </div>
+    <div>
+      <label class="block text-sm text-gray-600 mb-1">Valor do Imóvel</label>
+      <input type="text" appCurrencyMask [(ngModel)]="valorImovel" name="valorImovel" (ngModelChange)="onValorImovelChange()" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: R$300.000,00" />
+    </div>
+    <div>
+      <label class="block text-sm text-gray-600 mb-1">Valor da Entrada</label>
+      <input type="text" appCurrencyMask [(ngModel)]="entrada" name="entrada" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: R$60.000,00" />
+      <div class="mt-1 text-xs text-gray-500" *ngIf="percentualEntradaMinima > 0">
+        Entrada mínima: <strong class="text-[#2563EB]">{{ percentualEntradaMinima }}%</strong> ({{ entradaMinimaRecomendada | currency:'BRL':'symbol':'1.2-2':'pt-BR' }})
+      </div>
+    </div>
+    <div>
+      <label class="block text-sm text-gray-600 mb-1">Prazo (anos)</label>
+      <input type="number" [(ngModel)]="prazoAnos" name="prazoAnos" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: 30 anos" />
+    </div>
+    <div>
+      <label class="block text-sm text-gray-600 mb-1">Sistema de Amortização</label>
+      <select [(ngModel)]="sistema" name="sistema" class="w-full rounded-xl border border-gray-300 px-3 py-2">
+        <option value="SAC">SAC</option>
+        <option value="PRICE">PRICE</option>
+      </select>
+    </div>
+
+    <div class="md:col-span-2 flex justify-end">
+      <button type="submit" class="rounded-xl bg-[#2563EB] text-white px-5 py-3 shadow-md hover:bg-[#1E4FD7]">Simular</button>
+    </div>
+  </form>
+
+  <div *ngIf="resultado as r" class="grid md:grid-cols-2 gap-6">
+    <div class="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
+      <h3 class="font-semibold mb-3">Resultado</h3>
+      <ul class="space-y-2 text-gray-800">
+        <li class="flex justify-between"><span>Valor da Parcela Inicial</span><strong>{{ r.parcelaInicial }}</strong></li>
+        <li class="flex justify-between"><span>Valor da Parcela Final</span><strong>{{ r.parcelaFinal }}</strong></li>
+        <li class="flex justify-between"><span>Valor Total Pago</span><strong>{{ r.valorTotalPago }}</strong></li>
+        <li class="flex justify-between"><span>Total de Juros</span><strong>{{ r.totalJuros }}</strong></li>
+      </ul>
+    </div>
+    <div class="rounded-2xl bg-white p-6 shadow-sm border border-gray-200">
+      <h3 class="font-semibold mb-3">Anúncios</h3>
+      <div class="h-40 rounded-xl border border-dashed border-gray-300 flex items-center justify-center text-gray-500">Área de anúncio (sidebar)</div>
+    </div>
+  </div>
+</section>
