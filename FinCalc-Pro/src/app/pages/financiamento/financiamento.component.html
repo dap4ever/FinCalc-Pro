@@ -1,5 +1,40 @@
 <section class="space-y-6">
-  <h1 class="text-2xl font-semibold text-[#1F2937]">Calculadora de Financiamento Imobiliário</h1>
+  <!-- Conteúdo Editorial Introdutório -->
+  <article class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100 mb-8">
+    <h1 class="text-3xl font-bold text-[#1F2937] mb-4">Guia Completo de Financiamento Imobiliário</h1>
+    
+    <p class="text-gray-700 leading-relaxed mb-4">
+      O financiamento imobiliário é uma das decisões financeiras mais importantes da vida. Compreender como funcionam os 
+      sistemas de amortização, taxas de juros e impacto do prazo pode economizar dezenas de milhares de reais ao longo 
+      do contrato. Nossa calculadora utiliza taxas reais praticadas pelos principais bancos do mercado brasileiro.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 mt-6">
+      <div class="bg-white p-5 rounded-xl border border-gray-200">
+        <h3 class="font-semibold text-[#1F2937] mb-2 flex items-center gap-2">
+          <span class="text-2xl">📈</span> Sistema SAC
+        </h3>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          <strong>Sistema de Amortização Constante:</strong> Parcelas decrescentes, começando mais altas. 
+          Ideal para quem tem renda mais alta no início e deseja pagar menos juros no total do financiamento.
+          A amortização é fixa, e os juros diminuem mês a mês sobre o saldo devedor.
+        </p>
+      </div>
+
+      <div class="bg-white p-5 rounded-xl border border-gray-200">
+        <h3 class="font-semibold text-[#1F2937] mb-2 flex items-center gap-2">
+          <span class="text-2xl">📊</span> Tabela Price
+        </h3>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          <strong>Parcelas Fixas:</strong> Todas as parcelas têm o mesmo valor durante todo o período. 
+          Facilita o planejamento financeiro, mas você paga mais juros no início e amortiza menos o saldo devedor 
+          nos primeiros anos.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <h2 class="text-2xl font-semibold text-[#1F2937]">Calculadora de Financiamento Imobiliário</h2>
   <p class="text-gray-700">Simule parcelas, juros e valor total do financiamento</p>
 
   <form class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" (ngSubmit)="simular()">
@@ -126,4 +161,90 @@
       </div>
     </div>
   </div>
+
+  <!-- Conteúdo Editorial: Perguntas Frequentes -->
+  <article class="mt-12 bg-white p-8 rounded-2xl border border-gray-200">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-6">Perguntas Frequentes sobre Financiamento Imobiliário</h2>
+    
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Qual é a entrada mínima para financiamento?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          A maioria dos bancos exige entrada mínima de 20% a 30% do valor do imóvel. Entradas maiores resultam em taxas 
+          de juros mais baixas e aprovação mais fácil. Alguns programas habitacionais podem aceitar entradas menores.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Quanto da minha renda pode ser comprometida?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Os bancos geralmente aprovam financiamentos onde a parcela não ultrapasse 30% da renda familiar líquida. 
+          Este limite garante que você mantenha capacidade para outras despesas essenciais e emergências.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Posso amortizar o saldo devedor antecipadamente?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Sim! A amortização antecipada permite reduzir o prazo ou o valor das parcelas. É uma excelente estratégia 
+          quando você tem recursos extras, pois reduz significativamente o total de juros pagos. Não há penalidades 
+          para amortização antecipada no Brasil.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Quais documentos são necessários?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Geralmente são solicitados: RG, CPF, comprovante de residência, declaração de Imposto de Renda dos últimos 
+          2 anos, holerites recentes (3 a 6 meses), extrato bancário, certidão negativa de protestos e certidão de 
+          cartório de imóveis. Para autônomos, pode ser necessário declarações específicas de renda.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Vale a pena usar FGTS no financiamento?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          O FGTS pode ser usado na entrada, amortização ou pagamento de parcelas, o que reduz significativamente o 
+          custo total. É especialmente vantajoso para quem está adquirindo o primeiro imóvel ou possui saldo considerável. 
+          Consulte as regras da Caixa Econômica Federal para elegibilidade.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Dicas Práticas -->
+  <article class="mt-8 bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border border-green-100">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-6">Dicas para Conseguir as Melhores Condições</h2>
+    
+    <ul class="space-y-4">
+      <li class="flex gap-3">
+        <span class="text-2xl">✓</span>
+        <div>
+          <strong class="text-[#1F2937]">Mantenha seu score de crédito alto:</strong>
+          <p class="text-gray-700 text-sm mt-1">Um bom histórico de pagamentos resulta em taxas de juros mais baixas e aprovação facilitada.</p>
+        </div>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">✓</span>
+        <div>
+          <strong class="text-[#1F2937]">Compare propostas de múltiplos bancos:</strong>
+          <p class="text-gray-700 text-sm mt-1">As taxas podem variar de 0,5% a 2% entre instituições, gerando diferenças de dezenas de milhares de reais.</p>
+        </div>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">✓</span>
+        <div>
+          <strong class="text-[#1F2937]">Considere relacionamento bancário:</strong>
+          <p class="text-gray-700 text-sm mt-1">Clientes com conta salário ou investimentos no banco podem conseguir condições especiais.</p>
+        </div>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">✓</span>
+        <div>
+          <strong class="text-[#1F2937]">Negocie tarifas e seguros:</strong>
+          <p class="text-gray-700 text-sm mt-1">Além da taxa de juros, questione taxas administrativas e busque seguros mais competitivos.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
 </section>

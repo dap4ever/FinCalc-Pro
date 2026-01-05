@@ -17,6 +17,16 @@ export const routes: Routes = [
 		loadComponent: () => import('./pages/investimentos/investimentos.component').then(m => m.InvestimentosComponent)
 	},
 	{
+		path: 'blog',
+		title: 'Blog de Educação Financeira',
+		loadComponent: () => import('./pages/blog/blog.component').then(m => m.BlogComponent)
+	},
+	{
+		path: 'glossario',
+		title: 'Glossário Financeiro - Termos e Conceitos',
+		loadComponent: () => import('./pages/glossario/glossario.component').then(m => m.GlossarioComponent)
+	},
+	{
 		path: 'politica-privacidade',
 		title: 'Política de Privacidade',
 		loadComponent: () => import('./pages/politica-privacidade/politica-privacidade.component').then(m => m.PoliticaPrivacidadeComponent)

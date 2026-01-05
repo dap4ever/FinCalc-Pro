@@ -1,5 +1,42 @@
 <section class="space-y-6">
-  <h1 class="text-2xl font-semibold text-[#1F2937]">Calculadora de CDB e Tesouro</h1>
+  <!-- Conteúdo Editorial Introdutório -->
+  <article class="bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border border-green-100 mb-8">
+    <h1 class="text-3xl font-bold text-[#1F2937] mb-4">Guia de Investimentos em Renda Fixa</h1>
+    
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A renda fixa é a porta de entrada ideal para quem está começando a investir ou busca segurança com rentabilidade 
+      previsível. CDB e Tesouro Direto são as opções mais populares, oferecendo diferentes perfis de risco, liquidez e 
+      rentabilidade. Nossa calculadora considera todas as tributações e custos para mostrar o rendimento líquido real.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-4 mt-6">
+      <div class="bg-white p-4 rounded-xl border border-gray-200">
+        <div class="text-2xl mb-2">🏦</div>
+        <h3 class="font-semibold text-[#1F2937] mb-1 text-sm">CDB</h3>
+        <p class="text-xs text-gray-600 leading-relaxed">
+          Emitido por bancos, oferece rentabilidades competitivas (geralmente acima de 100% do CDI) e é garantido pelo FGC até R$ 250 mil.
+        </p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-gray-200">
+        <div class="text-2xl mb-2">🇧🇷</div>
+        <h3 class="font-semibold text-[#1F2937] mb-1 text-sm">Tesouro Direto</h3>
+        <p class="text-xs text-gray-600 leading-relaxed">
+          Títulos públicos federais, o investimento mais seguro do Brasil. Ideal para objetivos de médio e longo prazo.
+        </p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-gray-200">
+        <div class="text-2xl mb-2">📉</div>
+        <h3 class="font-semibold text-[#1F2937] mb-1 text-sm">IR Regressivo</h3>
+        <p class="text-xs text-gray-600 leading-relaxed">
+          A tributação diminui com o tempo: de 22,5% (até 6 meses) até 15% (acima de 2 anos). Incentiva investimentos de longo prazo.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <h2 class="text-2xl font-semibold text-[#1F2937]">Calculadora de CDB e Tesouro</h2>
   <p class="text-gray-700">Simule o rendimento de investimentos em renda fixa</p>
 
   <form class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" (ngSubmit)="simular()">
@@ -52,4 +89,225 @@
       <div class="h-40 rounded-xl border border-dashed border-gray-300 flex items-center justify-center text-gray-500">Área de anúncio (afterResult)</div>
     </div>
   </div>
+
+  <!-- Conteúdo Editorial: Tipos de Investimento -->
+  <article class="mt-12 bg-white p-8 rounded-2xl border border-gray-200">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-6">Entenda Cada Tipo de Investimento em Renda Fixa</h2>
+    
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-xl font-semibold text-[#1F2937] mb-3 flex items-center gap-2">
+          <span class="text-2xl">🏦</span> CDB - Certificado de Depósito Bancário
+        </h3>
+        <p class="text-gray-700 leading-relaxed mb-3">
+          O CDB é um título emitido por bancos para captar recursos. Ao investir em CDB, você está emprestando dinheiro 
+          ao banco, que utiliza esses recursos para suas operações e lhe paga juros por isso.
+        </p>
+        
+        <div class="bg-blue-50 p-5 rounded-xl mt-4">
+          <h4 class="font-semibold text-[#1F2937] mb-2">Tipos de CDB:</h4>
+          <ul class="space-y-2 text-sm text-gray-700">
+            <li><strong>CDB Pós-fixado:</strong> Rentabilidade atrelada ao CDI (geralmente 100% a 130% do CDI). É o mais comum e segue as variações da taxa básica de juros.</li>
+            <li><strong>CDB Prefixado:</strong> Taxa de juros definida no momento da aplicação (ex: 12% ao ano). Você sabe exatamente quanto receberá no vencimento.</li>
+            <li><strong>CDB Híbrido:</strong> Combinação de taxa fixa com inflação (IPCA + taxa). Protege seu poder de compra e garante ganho real.</li>
+          </ul>
+        </div>
+
+        <div class="mt-4 p-4 bg-green-50 rounded-xl">
+          <p class="text-sm text-gray-700">
+            <strong class="text-green-700">✓ Proteção FGC:</strong> O Fundo Garantidor de Créditos garante até R$ 250.000 por CPF e instituição financeira, 
+            limitado a R$ 1 milhão a cada 4 anos. Isso torna o CDB muito seguro mesmo em bancos menores.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold text-[#1F2937] mb-3 flex items-center gap-2">
+          <span class="text-2xl">🏛️</span> Tesouro Direto - Títulos Públicos Federais
+        </h3>
+        <p class="text-gray-700 leading-relaxed mb-3">
+          O Tesouro Direto é um programa do governo federal que permite a pessoas físicas comprarem títulos públicos pela internet. 
+          É considerado o investimento mais seguro do Brasil, pois é garantido pelo Tesouro Nacional.
+        </p>
+        
+        <div class="bg-yellow-50 p-5 rounded-xl mt-4">
+          <h4 class="font-semibold text-[#1F2937] mb-2">Principais Títulos:</h4>
+          <ul class="space-y-3 text-sm text-gray-700">
+            <li>
+              <strong>Tesouro Selic:</strong> Pós-fixado, segue a taxa Selic. Ideal para reserva de emergência por ter liquidez diária 
+              sem perda de rentabilidade. Menor risco de volatilidade.
+            </li>
+            <li>
+              <strong>Tesouro Prefixado:</strong> Taxa fixa definida na compra. Indicado para quem acredita que os juros vão cair. 
+              Pode ter variação de preço antes do vencimento.
+            </li>
+            <li>
+              <strong>Tesouro IPCA+:</strong> Híbrido (inflação + taxa fixa). Garante poder de compra e rentabilidade real. 
+              Ideal para objetivos de longo prazo como aposentadoria.
+            </li>
+          </ul>
+        </div>
+
+        <div class="mt-4 p-4 bg-blue-50 rounded-xl">
+          <p class="text-sm text-gray-700">
+            <strong class="text-blue-700">📌 Custos:</strong> Há cobrança de taxa de custódia de 0,20% ao ano pela B3 (gratuita para 
+            saldos até R$ 10.000 no Tesouro Selic) e possível taxa de administração da corretora (muitas isentam essa taxa).
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Tabela de Tributação -->
+  <article class="mt-8 bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl border border-purple-100">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-6">Tabela Regressiva de Imposto de Renda</h2>
+    
+    <p class="text-gray-700 leading-relaxed mb-6">
+      A tributação em renda fixa segue a tabela regressiva: quanto mais tempo você mantém o investimento, 
+      menor é a alíquota de Imposto de Renda sobre os rendimentos. O IR é retido na fonte automaticamente.
+    </p>
+
+    <div class="overflow-x-auto">
+      <table class="w-full bg-white rounded-xl overflow-hidden shadow-sm">
+        <thead class="bg-purple-100">
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-[#1F2937]">Prazo do Investimento</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-[#1F2937]">Alíquota de IR</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-[#1F2937]">Exemplo (R$ 10.000 de rendimento)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr>
+            <td class="px-6 py-4 text-sm text-gray-700">Até 180 dias</td>
+            <td class="px-6 py-4 text-sm font-semibold text-red-600">22,5%</td>
+            <td class="px-6 py-4 text-sm text-gray-700">IR: R$ 2.250 | Líquido: R$ 7.750</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-6 py-4 text-sm text-gray-700">De 181 a 360 dias</td>
+            <td class="px-6 py-4 text-sm font-semibold text-orange-600">20%</td>
+            <td class="px-6 py-4 text-sm text-gray-700">IR: R$ 2.000 | Líquido: R$ 8.000</td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 text-sm text-gray-700">De 361 a 720 dias</td>
+            <td class="px-6 py-4 text-sm font-semibold text-yellow-600">17,5%</td>
+            <td class="px-6 py-4 text-sm text-gray-700">IR: R$ 1.750 | Líquido: R$ 8.250</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-6 py-4 text-sm text-gray-700">Acima de 720 dias (2 anos)</td>
+            <td class="px-6 py-4 text-sm font-semibold text-green-600">15%</td>
+            <td class="px-6 py-4 text-sm text-gray-700">IR: R$ 1.500 | Líquido: R$ 8.500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-6 p-4 bg-white rounded-xl border border-purple-200">
+      <p class="text-sm text-gray-700">
+        <strong>💡 Dica:</strong> Investir com horizonte de mais de 2 anos reduz a tributação em 7,5 pontos percentuais 
+        (de 22,5% para 15%), aumentando significativamente sua rentabilidade líquida.
+      </p>
+    </div>
+  </article>
+
+  <!-- Perguntas Frequentes -->
+  <article class="mt-8 bg-white p-8 rounded-2xl border border-gray-200">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-6">Perguntas Frequentes sobre Investimentos</h2>
+    
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Qual investimento rende mais: CDB ou Tesouro Direto?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Depende das condições do mercado e do banco emissor. CDBs de bancos menores podem oferecer taxas superiores 
+          (120% a 130% do CDI) comparado ao Tesouro Selic (100% da Selic), mas possuem menor liquidez. Compare sempre 
+          as rentabilidades líquidas considerando IR e custos.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Posso resgatar antes do vencimento?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          No Tesouro Direto, sim, mas pode haver ágio ou deságio (ganho ou perda) se vender antes do vencimento, 
+          especialmente em títulos prefixados e IPCA+. Em CDBs, depende: alguns têm liquidez diária, outros só no vencimento. 
+          Verifique as condições antes de investir.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">O que é CDI e como ele funciona?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          CDI (Certificado de Depósito Interbancário) é a taxa média de empréstimos entre bancos, muito próxima da taxa Selic. 
+          É a principal referência para investimentos de renda fixa. Quando dizemos "110% do CDI", significa que o investimento 
+          rende 110% dessa taxa de referência.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Qual o valor mínimo para começar a investir?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          No Tesouro Direto, você pode começar com cerca de R$ 30 (fração de título). Em CDBs, varia conforme o banco e 
+          o tipo de CDB, geralmente a partir de R$ 1.000, mas algumas instituições oferecem opções com valores menores.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-[#1F2937] mb-2">Como montar uma carteira diversificada em renda fixa?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Combine diferentes tipos de ativos conforme seus objetivos: Tesouro Selic para reserva de emergência (liquidez imediata), 
+          CDBs pós-fixados para médio prazo, e Tesouro IPCA+ ou CDBs prefixados para longo prazo. Diversifique entre diferentes 
+          bancos e vencimentos para balancear risco, liquidez e rentabilidade.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Estratégias de Investimento -->
+  <article class="mt-8 bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-6">Estratégias para Maximizar seus Investimentos</h2>
+    
+    <div class="space-y-4">
+      <div class="flex gap-4">
+        <div class="text-3xl">🎯</div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-[#1F2937] mb-1">Escada de Vencimentos</h4>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Divida seu capital em parcelas com vencimentos escalonados (6 meses, 1 ano, 2 anos, etc.). Isso garante 
+            liquidez periódica e permite aproveitar diferentes cenários de juros.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="text-3xl">📈</div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-[#1F2937] mb-1">Reinvestimento de Rendimentos</h4>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Ao reinvestir os rendimentos, você aproveita o poder dos juros compostos, acelerando o crescimento do patrimônio. 
+            Com o tempo, os ganhos sobre ganhos se tornam cada vez mais expressivos.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="text-3xl">⚖️</div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-[#1F2937] mb-1">Balanceamento Pós x Pré</h4>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Se espera alta dos juros, priorize pós-fixados (CDI/Selic). Se espera queda, aproveite prefixados com taxas atrativas. 
+            Para proteção contra inflação, mantenha sempre uma parcela em IPCA+.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="text-3xl">🔄</div>
+        <div class="flex-1">
+          <h4 class="font-semibold text-[#1F2937] mb-1">Revisão Periódica</h4>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Reavalie seus investimentos a cada 6 meses. Verifique se há oportunidades melhores no mercado e ajuste sua estratégia 
+            conforme mudanças na taxa Selic e seus objetivos de vida.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
 </section>
