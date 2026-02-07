@@ -1,0 +1,101 @@
+<section class="max-w-6xl mx-auto px-4 py-12">
+  <!-- Cabeçalho -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-[#1F2937] mb-4">Blog de Educação Financeira</h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      Artigos, guias e dicas para você tomar decisões financeiras mais inteligentes
+    </p>
+  </div>
+
+  <!-- Artigo em Destaque -->
+  <article class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-8 md:p-12 text-white mb-12 shadow-xl">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="px-4 py-1 bg-white/20 rounded-full text-sm font-medium">✨ Artigo em Destaque</span>
+      <span class="text-sm opacity-90">2 de Janeiro, 2026</span>
+    </div>
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">
+      Como Escolher o Melhor Sistema de Amortização para Seu Financiamento
+    </h2>
+    <p class="text-lg mb-6 opacity-90 leading-relaxed">
+      A escolha entre SAC e Price pode significar uma diferença de dezenas de milhares de reais ao longo do financiamento. 
+      Neste guia completo, explicamos como cada sistema funciona, suas vantagens e desvantagens, e qual é o mais adequado 
+      para diferentes perfis de compradores.
+    </p>
+    <div class="flex items-center gap-6 text-sm">
+      <span>📖 8 min de leitura</span>
+      <span>💰 Financiamento</span>
+    </div>
+  </article>
+
+  <!-- Grade de Artigos -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+    <article *ngFor="let artigo of artigos" 
+             class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group">
+      <div class="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center group-hover:from-blue-50 group-hover:to-blue-100 transition-colors">
+        <span class="text-6xl">
+          {{ artigo.categoria === 'Financiamento' ? '🏠' : artigo.categoria === 'Investimentos' ? '📈' : '📚' }}
+        </span>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium">{{ artigo.categoria }}</span>
+          <span class="text-xs text-gray-500">{{ artigo.tempo }}</span>
+        </div>
+        <h3 class="text-xl font-semibold text-[#1F2937] mb-3 leading-tight group-hover:text-[#2563EB] transition-colors">
+          {{ artigo.titulo }}
+        </h3>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+          {{ artigo.resumo }}
+        </p>
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-gray-500">{{ artigo.data }}</span>
+          <span class="text-[#2563EB] text-sm font-medium group-hover:underline">Ler artigo →</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Seção de Categorias -->
+  <section class="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 md:p-12 border border-gray-200">
+    <h2 class="text-3xl font-bold text-[#1F2937] mb-8 text-center">Explore por Categoria</h2>
+    
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-300 transition-colors cursor-pointer">
+        <div class="text-4xl mb-3">🏠</div>
+        <h3 class="text-xl font-semibold text-[#1F2937] mb-2">Financiamento</h3>
+        <p class="text-gray-600 text-sm mb-3">Tudo sobre crédito imobiliário, sistemas de amortização e dicas de negociação.</p>
+        <span class="text-[#2563EB] text-sm font-medium">12 artigos →</span>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-green-300 transition-colors cursor-pointer">
+        <div class="text-4xl mb-3">📈</div>
+        <h3 class="text-xl font-semibold text-[#1F2937] mb-2">Investimentos</h3>
+        <p class="text-gray-600 text-sm mb-3">Guias de renda fixa, variável, fundos e estratégias de diversificação.</p>
+        <span class="text-[#2563EB] text-sm font-medium">18 artigos →</span>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-purple-300 transition-colors cursor-pointer">
+        <div class="text-4xl mb-3">📚</div>
+        <h3 class="text-xl font-semibold text-[#1F2937] mb-2">Educação Financeira</h3>
+        <p class="text-gray-600 text-sm mb-3">Conceitos básicos, planejamento e dicas para organizar suas finanças.</p>
+        <span class="text-[#2563EB] text-sm font-medium">15 artigos →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <div class="mt-12 text-center bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 border border-blue-100">
+    <h3 class="text-2xl font-bold text-[#1F2937] mb-3">Pronto para simular seus investimentos?</h3>
+    <p class="text-gray-600 mb-6">Use nossas calculadoras gratuitas para planejar seu futuro financeiro</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a routerLink="/financiamento-imobiliario" 
+         class="rounded-xl bg-[#2563EB] text-white px-6 py-3 shadow-md hover:bg-[#1E4FD7] transition-colors">
+        Simular Financiamento
+      </a>
+      <a routerLink="/investimentos" 
+         class="rounded-xl border-2 border-gray-300 text-[#1F2937] px-6 py-3 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors">
+        Simular Investimentos
+      </a>
+    </div>
+  </div>
+</section>

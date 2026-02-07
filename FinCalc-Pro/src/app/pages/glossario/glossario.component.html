@@ -1,0 +1,84 @@
+<section class="max-w-5xl mx-auto px-4 py-12">
+  <!-- Cabeçalho -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-[#1F2937] mb-4">Glossário Financeiro</h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      Entenda os principais termos e conceitos do mercado financeiro
+    </p>
+  </div>
+
+  <!-- Introdução -->
+  <article class="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-blue-100 mb-12">
+    <p class="text-gray-700 leading-relaxed mb-4">
+      O mundo das finanças possui uma linguagem própria, repleta de termos técnicos que podem parecer confusos à primeira vista. 
+      Este glossário foi criado para desmistificar os principais conceitos relacionados a financiamentos, investimentos e 
+      planejamento financeiro, ajudando você a tomar decisões mais informadas.
+    </p>
+    <p class="text-gray-700 leading-relaxed">
+      Cada termo inclui uma definição clara e objetiva, focando em aplicações práticas do dia a dia. Use este guia como 
+      referência sempre que encontrar uma palavra desconhecida em nossas calculadoras ou artigos.
+    </p>
+  </article>
+
+  <!-- Índice Alfabético -->
+  <div class="flex flex-wrap gap-2 justify-center mb-8">
+    <a *ngFor="let grupo of termos" 
+       [href]="'#letra-' + grupo.letra"
+       class="w-10 h-10 rounded-lg bg-white border-2 border-gray-200 hover:border-[#2563EB] hover:bg-blue-50 flex items-center justify-center font-semibold text-[#1F2937] transition-all">
+      {{ grupo.letra }}
+    </a>
+  </div>
+
+  <!-- Lista de Termos -->
+  <div class="space-y-8">
+    <div *ngFor="let grupo of termos" [id]="'letra-' + grupo.letra" class="scroll-mt-24">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#1E4FD7] flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+          {{ grupo.letra }}
+        </div>
+        <div class="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent"></div>
+      </div>
+
+      <div class="grid gap-4 md:gap-6">
+        <article *ngFor="let item of grupo.items" 
+                 class="bg-white rounded-2xl p-6 border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
+          <h3 class="text-xl font-bold text-[#1F2937] mb-3">{{ item.termo }}</h3>
+          <p class="text-gray-700 leading-relaxed">{{ item.definicao }}</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção de Ajuda -->
+  <article class="mt-12 bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 border border-green-100">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-4">Ainda tem dúvidas?</h2>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Se você não encontrou o termo que procurava ou precisa de mais informações, visite nossa seção de artigos 
+      educacionais ou use nossas calculadoras para simulações práticas.
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <a routerLink="/blog" 
+         class="rounded-xl bg-[#2563EB] text-white px-6 py-3 shadow-md hover:bg-[#1E4FD7] transition-colors inline-block">
+        Ver Artigos Educacionais
+      </a>
+      <a routerLink="/" 
+         class="rounded-xl border-2 border-gray-300 text-[#1F2937] px-6 py-3 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors inline-block">
+        Voltar à Página Inicial
+      </a>
+    </div>
+  </article>
+
+  <!-- Dica Educacional -->
+  <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
+    <div class="flex gap-4">
+      <div class="text-3xl">💡</div>
+      <div>
+        <h3 class="font-semibold text-[#1F2937] mb-2">Dica de Aprendizado</h3>
+        <p class="text-gray-700 text-sm leading-relaxed">
+          À medida que você usa nossas calculadoras e lê os resultados, volte a este glossário para entender melhor 
+          cada termo. O aprendizado gradual e contextualizado é a melhor forma de dominar o vocabulário financeiro!
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
