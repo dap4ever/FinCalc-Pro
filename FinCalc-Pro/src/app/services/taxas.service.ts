@@ -13,12 +13,13 @@ export interface TaxaJuros {
 export class TaxasService {
   
   // Valores estáticos baseados nas taxas do Banco Central
-  // Em produção, isso viria de um backend que faz o proxy da API
+  // Atualizado para dezembro de 2025
+  // SELIC: 15% a.a. | CDI: 14.90% a.a. | Financiamento: ~15.50% a.a.
   getTaxas(): Observable<TaxaJuros> {
     return of({
-      selic: 10.75,
-      financiamentoImobiliario: 10.5,
-      cdi: 10.65
+      selic: 15.00,
+      financiamentoImobiliario: 15.50,
+      cdi: 14.90
     });
   }
 }

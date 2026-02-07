@@ -1,0 +1,52 @@
+<div class="py-16 xl:px-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <header class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-[#1F2937] mb-4">Blog FinCalc Pro</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Artigos, guias e dicas para você dominar suas finanças e investir melhor.
+      </p>
+    </header>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <article
+        *ngFor="let post of posts$ | async"
+        class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden flex flex-col"
+      >
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center gap-2 mb-4">
+            <span
+              class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
+              >{{ post.category }}</span
+            >
+            <span class="text-gray-400 text-xs">{{ post.date | date: 'dd/MM/yyyy' }}</span>
+          </div>
+
+          <h2 class="text-xl font-bold text-[#1F2937] mb-3 leading-tight">
+            <a [routerLink]="['/blog', post.slug]" class="hover:text-blue-600 transition-colors">
+              {{ post.title }}
+            </a>
+          </h2>
+
+          <p class="text-gray-600 mb-6 flex-1 line-clamp-3">
+            {{ post.excerpt }}
+          </p>
+
+          <a
+            [routerLink]="['/blog', post.slug]"
+            class="text-blue-600 font-semibold hover:underline inline-flex items-center mt-auto"
+          >
+            Ler artigo completo
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

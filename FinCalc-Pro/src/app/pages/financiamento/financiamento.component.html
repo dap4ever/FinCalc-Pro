@@ -2,7 +2,10 @@
   <h1 class="text-2xl font-semibold text-[#1F2937]">Calculadora de Financiamento Imobiliário</h1>
   <p class="text-gray-700">Simule parcelas, juros e valor total do financiamento</p>
 
-  <form class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-200" (ngSubmit)="simular()">
+  <form
+    class="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-200"
+    (ngSubmit)="simular()"
+  >
     <div>
       <label class="block text-sm text-gray-600 mb-1">Banco</label>
       <div class="relative">
@@ -20,11 +23,22 @@
             />
             <span class="text-gray-900">{{ bancoSelecionado || 'Selecione um banco' }}</span>
           </div>
-          <svg class="w-5 h-5 text-gray-400" [class.rotate-180]="dropdownAberto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          <svg
+            class="w-5 h-5 text-gray-400"
+            [class.rotate-180]="dropdownAberto"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            ></path>
           </svg>
         </button>
-        
+
         <div
           *ngIf="dropdownAberto"
           class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow-lg max-h-80 overflow-auto"
@@ -41,11 +55,13 @@
               [src]="banco.logo"
               [alt]="banco.nome"
               class="h-6 w-auto object-contain p-1 bg-gray-50 rounded"
-              onerror="this.style.display='none'"
+              onerror="this.style.display = 'none'"
             />
             <div class="flex-1">
               <div class="font-medium text-gray-900">{{ banco.nome }}</div>
-              <div *ngIf="banco.taxa > 0" class="text-xs text-gray-500">{{ banco.taxa.toFixed(2) }}% a.a.</div>
+              <div *ngIf="banco.taxa > 0" class="text-xs text-gray-500">
+                {{ banco.taxa.toFixed(2) }}% a.a.
+              </div>
             </div>
           </button>
         </div>
@@ -53,50 +69,113 @@
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Taxa de Juros Anual (%)</label>
-      <input type="number" step="0.01" [(ngModel)]="jurosAnual" name="jurosAnual" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: 9.5%" />
+      <div class="flex gap-2">
+        <input
+          type="number"
+          step="0.01"
+          [(ngModel)]="jurosAnual"
+          name="jurosAnual"
+          class="flex-1 rounded-xl border border-gray-300 px-3 py-2"
+          placeholder="Ex: 9.5%"
+        />
+        <button
+          type="button"
+          *ngIf="bancoSelecionado === 'Caixa Econômica Federal'"
+          (click)="abrirCaixaModal()"
+          title="Ver linhas de crédito da Caixa"
+          class="px-3 py-2 bg-[#2563EB] text-white rounded-xl hover:bg-[#1E4FD7] transition-colors font-semibold"
+        >
+          ℹ️
+        </button>
+      </div>
       <div class="mt-1 text-xs text-gray-500" *ngIf="!carregandoTaxas">
-        Taxa média atual: <strong class="text-[#2563EB]">{{ taxaSugerida.toFixed(2) }}% a.a.</strong>
-        <button type="button" (click)="aplicarTaxaSugerida()" class="ml-2 text-[#2563EB] hover:underline">Aplicar</button>
+        Taxa média atual:
+        <strong class="text-[#2563EB]">{{ taxaSugerida.toFixed(2) }}% a.a.</strong>
+        <button
+          type="button"
+          (click)="aplicarTaxaSugerida()"
+          class="ml-2 text-[#2563EB] hover:underline"
+        >
+          Aplicar
+        </button>
       </div>
       <div class="mt-1 text-xs text-gray-400" *ngIf="carregandoTaxas">Carregando taxa atual...</div>
+      <div class="mt-1 text-xs text-green-600" *ngIf="bancoSelecionadoNome">
+        ✓ {{ bancoSelecionadoNome }} selecionado
+      </div>
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Valor do Imóvel</label>
       <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-medium">R$</span>
-        <input type="text" appCurrencyMask [(ngModel)]="valorImovel" name="valorImovel" (ngModelChange)="onValorImovelChange()" class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-2" placeholder="300.000,00" />
+        <input
+          type="text"
+          appCurrencyMask
+          [(ngModel)]="valorImovel"
+          name="valorImovel"
+          (ngModelChange)="onValorImovelChange()"
+          class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-2"
+          placeholder="300.000,00"
+        />
       </div>
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Valor da Entrada</label>
       <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-medium">R$</span>
-        <input type="text" appCurrencyMask [(ngModel)]="entrada" name="entrada" class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-2" placeholder="60.000,00" />
+        <input
+          type="text"
+          appCurrencyMask
+          [(ngModel)]="entrada"
+          name="entrada"
+          class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-2"
+          placeholder="60.000,00"
+        />
       </div>
       <div class="mt-1 text-xs text-gray-500" *ngIf="percentualEntradaMinima > 0">
-        Entrada mínima: <strong class="text-[#2563EB]">{{ percentualEntradaMinima }}%</strong> ({{ entradaMinimaRecomendada | currency:'BRL':'symbol':'1.2-2':'pt-BR' }})
+        Entrada mínima: <strong class="text-[#2563EB]">{{ percentualEntradaMinima }}%</strong> ({{
+          entradaMinimaRecomendada | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR'
+        }})
       </div>
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Prazo (anos)</label>
-      <input type="number" [(ngModel)]="prazoAnos" name="prazoAnos" (focus)="$event.target.select()" class="w-full rounded-xl border border-gray-300 px-3 py-2" placeholder="Ex: 30 anos" />
+      <input
+        type="number"
+        [(ngModel)]="prazoAnos"
+        name="prazoAnos"
+        (focus)="$event.target.select()"
+        class="w-full rounded-xl border border-gray-300 px-3 py-2"
+        placeholder="Ex: 30 anos"
+      />
     </div>
     <div>
       <label class="block text-sm text-gray-600 mb-1">Sistema de Amortização</label>
-      <select [(ngModel)]="sistema" name="sistema" class="w-full rounded-xl border border-gray-300 px-3 py-2">
+      <select
+        [(ngModel)]="sistema"
+        name="sistema"
+        class="w-full rounded-xl border border-gray-300 px-3 py-2"
+      >
         <option value="SAC">SAC</option>
         <option value="PRICE">PRICE</option>
       </select>
     </div>
 
     <div class="md:col-span-2 flex justify-end">
-      <button type="submit" class="rounded-xl bg-[#2563EB] text-white px-5 py-3 shadow-md hover:bg-[#1E4FD7]">Simular</button>
+      <button
+        type="submit"
+        class="rounded-xl bg-[#2563EB] text-white px-5 py-3 shadow-md hover:bg-[#1E4FD7]"
+      >
+        Simular
+      </button>
     </div>
   </form>
 
   <div *ngIf="resultado as r" class="mt-8">
     <div class="rounded-2xl bg-white p-8 shadow-sm border border-gray-200 max-w-2xl">
-      <h3 class="text-xl font-semibold mb-6 text-[#1F2937] pb-3 border-b-2 border-gray-200">Resultado da Simulação</h3>
+      <h3 class="text-xl font-semibold mb-6 text-[#1F2937] pb-3 border-b-2 border-gray-200">
+        Resultado da Simulação
+      </h3>
       <ul class="space-y-5">
         <li class="flex justify-between items-center py-3">
           <span class="text-base text-gray-600">Valor da Parcela Inicial</span>
@@ -118,7 +197,9 @@
     </div>
 
     <!-- Anúncio após resultado -->
-    <div class="mt-8 rounded-2xl bg-white p-8 shadow-sm border-2 border-dashed border-gray-300 max-w-2xl flex items-center justify-center min-h-[300px]">
+    <div
+      class="mt-8 rounded-2xl bg-white p-8 shadow-sm border-2 border-dashed border-gray-300 max-w-2xl flex items-center justify-center min-h-[300px]"
+    >
       <div class="text-center">
         <div class="text-5xl mb-3">📢</div>
         <p class="text-gray-500 text-lg">Espaço para Anúncio</p>
@@ -127,3 +208,183 @@
     </div>
   </div>
 </section>
+
+<!-- Conteúdo Educacional -->
+<section class="mt-16 space-y-12">
+  <!-- O que é Financiamento Imobiliário -->
+  <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-gray-200">
+    <h2 class="text-3xl font-bold text-[#1F2937] mb-6">O que é Financiamento Imobiliário?</h2>
+    <div class="prose max-w-none text-gray-700 leading-relaxed space-y-4">
+      <p>
+        O financiamento imobiliário é um empréstimo de longo prazo concedido por bancos e
+        instituições financeiras para a compra de imóveis residenciais ou comerciais. O imóvel
+        financiado serve como garantia (alienação fiduciária), o que permite taxas de juros mais
+        baixas em comparação com outros tipos de crédito.
+      </p>
+      <p>
+        No Brasil, os principais programas de financiamento são o
+        <strong>Sistema Financeiro da Habitação (SFH)</strong>, destinado a imóveis de até R$ 1,5
+        milhão com condições especiais, e o
+        <strong>Sistema de Financiamento Imobiliário (SFI)</strong>, para imóveis acima desse valor.
+      </p>
+    </div>
+  </div>
+
+  <!-- SAC vs PRICE -->
+  <div class="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 border border-gray-200">
+    <h2 class="text-3xl font-bold text-[#1F2937] mb-6">SAC vs PRICE: Qual escolher?</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold text-[#1F2937]">Sistema SAC</h3>
+        <p class="text-gray-700 leading-relaxed">
+          No <strong>Sistema de Amortização Constante</strong>, a amortização (pagamento do
+          principal) é fixa e os juros diminuem mensalmente. Isso resulta em:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700">
+          <li><strong>Parcelas decrescentes:</strong> começam mais altas e vão diminuindo</li>
+          <li><strong>Menor custo total:</strong> você paga menos juros ao final</li>
+          <li><strong>Amortização mais rápida:</strong> o saldo devedor cai mais rápido</li>
+        </ul>
+        <div class="bg-blue-100 border-l-4 border-blue-500 p-4 mt-4">
+          <p class="text-sm text-blue-900">
+            <strong>Ideal para:</strong> Quem tem renda suficiente para pagar parcelas iniciais mais
+            altas e quer economizar no total de juros.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold text-[#1F2937]">Tabela PRICE</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Na <strong>Tabela PRICE</strong>, as parcelas são fixas do início ao fim do contrato. Nos
+          primeiros anos, a maior parte da parcela é composta por juros:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-gray-700">
+          <li><strong>Parcelas fixas:</strong> mesmo valor do início ao fim</li>
+          <li><strong>Previsibilidade:</strong> mais fácil de planejar o orçamento</li>
+          <li><strong>Custo total maior:</strong> você paga mais juros ao final</li>
+        </ul>
+        <div class="bg-green-100 border-l-4 border-green-500 p-4 mt-4">
+          <p class="text-sm text-green-900">
+            <strong>Ideal para:</strong> Quem prefere estabilidade no orçamento mensal e não quer se
+            comprometer com parcelas iniciais altas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dicas para Financiamento -->
+  <div class="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-8 border border-gray-200">
+    <h2 class="text-3xl font-bold text-[#1F2937] mb-6">Dicas para obter o melhor financiamento</h2>
+    <div class="space-y-6">
+      <div class="flex gap-4 items-start">
+        <div class="text-3xl flex-shrink-0">💰</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Dê a maior entrada possível</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Quanto maior a entrada, menor o valor financiado e, consequentemente, menores serão os
+            juros pagos. Além disso, uma entrada acima de 20% pode garantir taxas melhores e maior
+            chance de aprovação.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="text-3xl flex-shrink-0">🔍</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Compare taxas de diferentes bancos</h3>
+          <p class="text-gray-700 leading-relaxed">
+            A taxa de juros pode variar significativamente entre instituições. Uma diferença de
+            apenas 0,5% ao ano pode representar dezenas de milhares de reais em um financiamento de
+            longo prazo. Use nossa calculadora para simular diferentes cenários.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="text-3xl flex-shrink-0">📋</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Mantenha seu cadastro limpo</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Score de crédito alto, CPF sem restrições e comprovação de renda estável são
+            fundamentais para obter aprovação e conseguir as melhores taxas. Consulte seu score
+            regularmente e mantenha suas contas em dia.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="text-3xl flex-shrink-0">⏳</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Escolha o prazo adequado</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Prazos mais longos resultam em parcelas menores, mas você pagará muito mais juros ao
+            longo do tempo. O ideal é encontrar um equilíbrio: parcelas que caibam confortavelmente
+            no orçamento (máximo 30% da renda) no menor prazo possível.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="text-3xl flex-shrink-0">🎯</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">
+            Considere amortizações extraordinárias
+          </h3>
+          <p class="text-gray-700 leading-relaxed">
+            Sempre que possível, faça amortizações extraordinárias (pagamentos extras). Você pode
+            optar por reduzir o prazo (manter a parcela e terminar mais cedo) ou reduzir a parcela
+            (manter o prazo com parcelas menores). Ambas as opções economizam juros.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custos Adicionais -->
+  <div class="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-8 border border-gray-200">
+    <h2 class="text-3xl font-bold text-[#1F2937] mb-6">Custos Adicionais no Financiamento</h2>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Além das parcelas mensais, existem diversos custos envolvidos na compra de um imóvel
+      financiado. É importante considerá-los no planejamento:
+    </p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="border-2 border-gray-200 rounded-xl p-6">
+        <h3 class="text-lg font-bold text-[#1F2937] mb-2">Taxas na Contratação</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li><strong>Taxa de avaliação:</strong> R$ 2.000 a R$ 4.000</li>
+          <li><strong>Registro do imóvel:</strong> ~1% do valor do imóvel</li>
+          <li><strong>ITBI:</strong> 2% a 3% do valor venal (varia por cidade)</li>
+          <li><strong>Seguro MIP:</strong> 0,025% a 0,04% ao mês</li>
+          <li><strong>Seguro DFI:</strong> R$ 500 a R$ 1.500/ano</li>
+        </ul>
+      </div>
+
+      <div class="border-2 border-gray-200 rounded-xl p-6">
+        <h3 class="text-lg font-bold text-[#1F2937] mb-2">Custos Mensais</h3>
+        <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li><strong>Parcela do financiamento</strong></li>
+          <li><strong>Condomínio:</strong> varia conforme o imóvel</li>
+          <li><strong>IPTU:</strong> depende da cidade e valor do imóvel</li>
+          <li><strong>Seguro incêndio:</strong> geralmente obrigatório</li>
+          <li><strong>Manutenção e reparos</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-6 bg-yellow-100 border-l-4 border-yellow-500 p-4">
+      <p class="text-sm text-yellow-900">
+        <strong>Dica:</strong> Reserve pelo menos 10% a 15% a mais do valor da parcela para cobrir
+        esses custos adicionais.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Modal da Caixa -->
+<app-caixa-info-modal
+  [isOpen]="caixaModalAberto"
+  (close)="fecharCaixaModal()"
+  (selectLinhaEvent)="aplicarTaxaCaixa($event)"
+>
+</app-caixa-info-modal>

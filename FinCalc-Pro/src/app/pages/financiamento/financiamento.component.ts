@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { CurrencyMask } from '../../shared/currency-mask';
 import { calcularFinanciamento, formatCurrencyBR, SistemaAmortizacao } from '../../services/finance.service';
 import { TaxasService } from '../../services/taxas.service';
+import { CaixaInfoModalComponent } from '../../components/caixa-info-modal/caixa-info-modal.component';
 
 @Component({
   standalone: true,
   selector: 'app-financiamento',
-  imports: [CommonModule, FormsModule, CurrencyMask],
+  imports: [CommonModule, FormsModule, CurrencyMask, CaixaInfoModalComponent],
   templateUrl: './financiamento.component.html',
   styleUrl: './financiamento.component.css'
 })
@@ -38,6 +39,8 @@ export class FinanciamentoComponent implements OnInit {
   percentualEntradaMinima = 0;
 
   resultado: { parcelaInicial: string; parcelaFinal: string; valorTotalPago: string; totalJuros: string } | null = null;
+  caixaModalAberto = false;
+  bancoSelecionadoNome = '';
 
   ngOnInit() {
     this.taxasService.getTaxas().subscribe({
@@ -127,5 +130,19 @@ export class FinanciamentoComponent implements OnInit {
       valorTotalPago: formatCurrencyBR(res.valorTotalPago),
       totalJuros: formatCurrencyBR(res.totalJuros)
     };
+  }
+
+  abrirCaixaModal() {
+    this.caixaModalAberto = true;
+  }
+
+  fecharCaixaModal() {
+    this.caixaModalAberto = false;
+  }
+
+  aplicarTaxaCaixa(evento: { nome: string; taxa: number }) {
+    this.bancoSelecionadoNome = evento.nome;
+    this.jurosAnual = evento.taxa;
+    this.fecharCaixaModal();
   }
 }

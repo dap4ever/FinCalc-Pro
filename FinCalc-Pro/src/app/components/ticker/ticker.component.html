@@ -1,0 +1,33 @@
+<div class="bg-gray-900 text-white overflow-hidden py-2" *ngIf="quotes$ | async as quotes">
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ticker-item" *ngFor="let quote of quotes">
+        <span class="font-bold text-gray-400 mr-2">{{ quote.shortName || quote.symbol }}:</span>
+        <span
+          class="font-mono"
+          [ngClass]="{
+            'text-green-400': isPositive(quote.regularMarketChangePercent),
+            'text-red-400': !isPositive(quote.regularMarketChangePercent),
+          }"
+        >
+          {{ quote.regularMarketPrice | number: '1.2-2' }}
+          <span class="text-xs">({{ quote.regularMarketChangePercent | number: '1.2-2' }}%)</span>
+        </span>
+      </div>
+      <!-- Duplicate for seamless scroll -->
+      <div class="ticker-item" *ngFor="let quote of quotes">
+        <span class="font-bold text-gray-400 mr-2">{{ quote.shortName || quote.symbol }}:</span>
+        <span
+          class="font-mono"
+          [ngClass]="{
+            'text-green-400': isPositive(quote.regularMarketChangePercent),
+            'text-red-400': !isPositive(quote.regularMarketChangePercent),
+          }"
+        >
+          {{ quote.regularMarketPrice | number: '1.2-2' }}
+          <span class="text-xs">({{ quote.regularMarketChangePercent | number: '1.2-2' }}%)</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

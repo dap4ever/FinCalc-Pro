@@ -12,17 +12,113 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+const fetchJson = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
+  return response.json();
+};
+
+const fetchText = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
+  return response.text();
+};
+
+app.get('/api/finance/news', async (req, res) => {
+  try {
+    const feedUrl = 'https://www.infomoney.com.br/feed/';
+    const xmlData = await fetchText(feedUrl);
+
+    // Simple manual parsing to avoid heavy dependencies/build issues
+    const items = [];
+    const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+    const titleRegex = /<title>(.*?)<\/title>/;
+    const linkRegex = /<link>(.*?)<\/link>/;
+    const pubDateRegex = /<pubDate>(.*?)<\/pubDate>/;
+    const guidRegex = /<guid.*?>(.*?)<\/guid>/;
+
+    let match;
+    while ((match = itemRegex.exec(xmlData)) !== null) {
+      if (items.length >= 6) break;
+      const itemContent = match[1];
+
+      const title = (itemContent.match(titleRegex) || [])[1];
+      const link = (itemContent.match(linkRegex) || [])[1];
+      const pubDate = (itemContent.match(pubDateRegex) || [])[1];
+      const guid = (itemContent.match(guidRegex) || [])[1];
+
+      if (title && link) {
+        items.push({
+          id: guid || link,
+          title: title.replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1'), // Unwrap CDATA if present
+          link: link,
+          publisher: 'InfoMoney',
+          providerPublishTime: pubDate ? new Date(pubDate).getTime() : Date.now(),
+          type: 'RSS',
+        });
+      }
+    }
+
+    res.json({ news: items });
+  } catch (error) {
+    console.error('Error fetching RSS news:', error);
+    res.status(500).json({ error: 'Failed to fetch news' });
+  }
+});
+
+app.get('/api/finance/quotes', async (req, res) => {
+  try {
+    // AwesomeAPI: USD-BRL,EUR-BRL,BTC-BRL
+    // https://docs.awesomeapi.com.br/api-de-moedas
+    const awesomeData: any = await fetchJson(
+      'https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL',
+    );
+
+    const quotes = [];
+
+    if (awesomeData.USDBRL) {
+      quotes.push({
+        symbol: 'USDBRL=X',
+        shortName: 'Dólar',
+        regularMarketPrice: parseFloat(awesomeData.USDBRL.bid),
+        regularMarketChangePercent: parseFloat(awesomeData.USDBRL.pctChange),
+      });
+    }
+
+    if (awesomeData.EURBRL) {
+      quotes.push({
+        symbol: 'EURBRL=X',
+        shortName: 'Euro',
+        regularMarketPrice: parseFloat(awesomeData.EURBRL.bid),
+        regularMarketChangePercent: parseFloat(awesomeData.EURBRL.pctChange),
+      });
+    }
+
+    if (awesomeData.BTCBRL) {
+      quotes.push({
+        symbol: 'BTC-BRL',
+        shortName: 'Bitcoin',
+        regularMarketPrice: parseFloat(awesomeData.BTCBRL.bid),
+        regularMarketChangePercent: parseFloat(awesomeData.BTCBRL.pctChange),
+      });
+    }
+
+    res.json(quotes);
+  } catch (error) {
+    console.error('Error fetching quotes from AwesomeAPI:', error);
+    res.status(500).json({ error: 'Failed to fetch quotes' });
+  }
+});
+
+app.get('/api/finance/movers', async (req, res) => {
+  try {
+    // Fallback since we don't have a free movers API. Returning empty.
+    res.json({ quotes: [] });
+  } catch (error) {
+    console.error('Error fetching movers:', error);
+    res.json({ quotes: [] });
+  }
+});
 
 /**
  * Serve static files from /browser
@@ -41,9 +137,7 @@ app.use(
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 

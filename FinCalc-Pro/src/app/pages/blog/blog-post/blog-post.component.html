@@ -1,0 +1,85 @@
+<div class="py-16 xl:px-20 bg-gray-50 min-h-screen">
+  <div class="max-w-4xl mx-auto px-4" *ngIf="post$ | async as post; else notFound">
+    <nav class="flex mb-8 text-sm text-gray-500">
+      <a routerLink="/" class="hover:text-blue-600">Home</a>
+      <span class="mx-2">/</span>
+      <a routerLink="/blog" class="hover:text-blue-600">Blog</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-800">{{ post.title }}</span>
+    </nav>
+
+    <article class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden">
+      <!-- Header do Post -->
+      <header class="p-8 md:p-12 border-b border-gray-100 bg-gradient-to-br from-white to-blue-50">
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded-full">{{
+            post.category
+          }}</span>
+          <span class="bg-gray-100 text-gray-600 text-sm font-semibold px-3 py-1 rounded-full">{{
+            post.date | date: 'longDate'
+          }}</span>
+        </div>
+
+        <h1 class="text-3xl md:text-5xl font-bold text-[#1F2937] mb-6 leading-tight">
+          {{ post.title }}
+        </h1>
+
+        <div class="flex items-center text-gray-600">
+          <div class="font-medium">Por {{ post.author }}</div>
+        </div>
+      </header>
+
+      <!-- Conteúdo do Post -->
+      <div class="p-8 md:p-12">
+        <div
+          class="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+          [innerHTML]="post.content"
+        ></div>
+
+        <!-- Tags -->
+        <div class="mt-12 pt-8 border-t border-gray-100">
+          <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Tags</h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              *ngFor="let tag of post.tags"
+              class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm transition-colors cursor-default"
+            >
+              #{{ tag }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Navegação Voltar -->
+    <div class="mt-8 text-center">
+      <a
+        routerLink="/blog"
+        class="inline-flex items-center text-[#2563EB] font-semibold hover:underline"
+      >
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          ></path>
+        </svg>
+        Voltar para o Blog
+      </a>
+    </div>
+  </div>
+
+  <ng-template #notFound>
+    <div class="text-center py-20">
+      <div class="text-6xl mb-4">😕</div>
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">Artigo não encontrado</h2>
+      <p class="text-gray-600 mb-8">O artigo que você procura não existe ou foi removido.</p>
+      <a
+        routerLink="/blog"
+        class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-colors"
+        >Voltar para o Blog</a
+      >
+    </div>
+  </ng-template>
+</div>

@@ -1,3 +1,4 @@
+<app-hero-news></app-hero-news>
 <section class="text-center py-16 md:py-24 xl:px-20">
   <h1 class="text-4xl md:text-5xl font-semibold text-[#1F2937] leading-tight">
     Tome decisões financeiras com clareza
@@ -6,25 +7,345 @@
     Simule financiamentos e investimentos de forma simples, rápida e gratuita
   </p>
   <div class="mt-8 flex flex-wrap justify-center gap-4">
-    <a routerLink="/financiamento-imobiliario" class="rounded-xl bg-[#2563EB] text-white px-6 py-3.5 shadow-md hover:bg-[#1E4FD7] transition-colors">Simular Financiamento</a>
-    <a routerLink="/investimentos" class="rounded-xl border-2 border-gray-300 text-[#1F2937] px-6 py-3.5 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors">Simular Investimentos</a>
+    <a
+      routerLink="/financiamento-imobiliario"
+      class="rounded-xl bg-[#2563EB] text-white px-6 py-3.5 shadow-md hover:bg-[#1E4FD7] transition-colors"
+      >Simular Financiamento</a
+    >
+    <a
+      routerLink="/investimentos"
+      class="rounded-xl border-2 border-gray-300 text-[#1F2937] px-6 py-3.5 hover:border-[#2563EB] hover:text-[#2563EB] transition-colors"
+      >Simular Investimentos</a
+    >
   </div>
 </section>
 
 <section class="grid md:grid-cols-3 gap-8 md:gap-10 pb-16 xl:px-20 mt-12 auto-rows-fr">
-  <div class="rounded-2xl bg-gradient-to-br from-white to-blue-50 p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:border-[#2563EB] transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
+  <div
+    class="rounded-2xl bg-gradient-to-br from-white to-blue-50 p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:border-[#2563EB] transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+  >
     <div class="text-5xl md:text-6xl mb-6 inline-block">🧮</div>
     <h3 class="text-xl md:text-2xl font-bold text-[#1F2937] mb-3">Cálculos Precisos</h3>
-    <p class="text-gray-600 leading-relaxed text-base flex-1">Simulações baseadas em taxas reais do mercado atualizadas diariamente</p>
+    <p class="text-gray-600 leading-relaxed text-base flex-1">
+      Simulações baseadas em taxas reais do mercado atualizadas diariamente
+    </p>
   </div>
-  <div class="rounded-2xl bg-gradient-to-br from-white to-green-50 p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:border-[#2563EB] transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
+  <div
+    class="rounded-2xl bg-gradient-to-br from-white to-green-50 p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:border-[#2563EB] transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+  >
     <div class="text-5xl md:text-6xl mb-6 inline-block">🛡️</div>
     <h3 class="text-xl md:text-2xl font-bold text-[#1F2937] mb-3">Seguro e Anônimo</h3>
-    <p class="text-gray-600 leading-relaxed text-base flex-1">Não coletamos seus dados pessoais, apenas calculamos os valores que você solicita</p>
+    <p class="text-gray-600 leading-relaxed text-base flex-1">
+      Não coletamos seus dados pessoais, apenas calculamos os valores que você solicita
+    </p>
   </div>
-  <div class="rounded-2xl bg-gradient-to-br from-white to-orange-50 p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:border-[#2563EB] transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
+  <div
+    class="rounded-2xl bg-gradient-to-br from-white to-orange-50 p-8 md:p-10 shadow-lg border border-gray-200 hover:shadow-2xl hover:border-[#2563EB] transition-all duration-300 transform hover:-translate-y-1 flex flex-col"
+  >
     <div class="text-5xl md:text-6xl mb-6 inline-block">⏱️</div>
     <h3 class="text-xl md:text-2xl font-bold text-[#1F2937] mb-3">Resultado Imediato</h3>
-    <p class="text-gray-600 leading-relaxed text-base flex-1">Visualize os valores em tempo real conforme altera os parâmetros</p>
+    <p class="text-gray-600 leading-relaxed text-base flex-1">
+      Visualize os valores em tempo real conforme altera os parâmetros
+    </p>
+  </div>
+</section>
+
+<!-- Seção Educacional: Por que usar calculadoras financeiras -->
+<section class="py-16 xl:px-20 bg-gradient-to-br from-blue-50 to-white">
+  <div class="max-w-4xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-[#1F2937] text-center mb-8">
+      Por que usar calculadoras financeiras?
+    </h2>
+    <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
+      <p>
+        O planejamento financeiro é essencial para alcançar seus objetivos, seja comprando a casa
+        própria, fazendo seu dinheiro render ou planejando a aposentadoria. Nossas calculadoras
+        ajudam você a:
+      </p>
+      <ul class="space-y-3 list-disc list-inside">
+        <li>
+          <strong>Comparar cenários:</strong> Veja como diferentes taxas de juros e prazos afetam
+          suas parcelas ou rendimentos
+        </li>
+        <li>
+          <strong>Tomar decisões informadas:</strong> Entenda exatamente quanto pagará ou receberá
+          antes de se comprometer
+        </li>
+        <li>
+          <strong>Planejar o futuro:</strong> Calcule quanto precisa investir mensalmente para
+          atingir suas metas
+        </li>
+        <li>
+          <strong>Evitar surpresas:</strong> Conheça o custo total de um financiamento, incluindo
+          juros e IOF
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Seção: Nossas Calculadoras -->
+<section class="py-16 xl:px-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-[#1F2937] text-center mb-12">
+      Nossas Calculadoras
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Calculadora de Financiamento -->
+      <div
+        class="rounded-2xl border-2 border-gray-200 p-8 hover:border-[#2563EB] hover:shadow-xl transition-all"
+      >
+        <div class="text-4xl mb-4">🏠</div>
+        <h3 class="text-2xl font-bold text-[#1F2937] mb-3">Financiamento Imobiliário</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+          Compare sistemas SAC e PRICE para o financiamento da casa própria. Veja parcelas, juros
+          totais e amortização mês a mês com taxas dos principais bancos.
+        </p>
+        <a
+          routerLink="/financiamento-imobiliario"
+          class="inline-block text-[#2563EB] font-semibold hover:underline"
+        >
+          Calcular agora →
+        </a>
+      </div>
+
+      <!-- Calculadora de Investimentos -->
+      <div
+        class="rounded-2xl border-2 border-gray-200 p-8 hover:border-[#2563EB] hover:shadow-xl transition-all"
+      >
+        <div class="text-4xl mb-4">📈</div>
+        <h3 class="text-2xl font-bold text-[#1F2937] mb-3">Investimentos CDB e Tesouro</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+          Simule o rendimento de CDB e Tesouro Direto com cálculo automático de IR progressivo. Veja
+          quanto receberá líquido após impostos.
+        </p>
+        <a
+          routerLink="/investimentos"
+          class="inline-block text-[#2563EB] font-semibold hover:underline"
+        >
+          Calcular agora →
+        </a>
+      </div>
+
+      <!-- Calculadora de Juros Compostos -->
+      <div
+        class="rounded-2xl border-2 border-gray-200 p-8 hover:border-[#2563EB] hover:shadow-xl transition-all"
+      >
+        <div class="text-4xl mb-4">💰</div>
+        <h3 class="text-2xl font-bold text-[#1F2937] mb-3">Juros Compostos</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+          Entenda o poder dos juros sobre juros. Calcule quanto seu dinheiro crescerá ao longo do
+          tempo com aportes mensais e reinvestimento dos rendimentos.
+        </p>
+        <a
+          routerLink="/juros-compostos"
+          class="inline-block text-[#2563EB] font-semibold hover:underline"
+        >
+          Calcular agora →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Seção: Dicas Financeiras -->
+<section class="py-16 xl:px-20 bg-gradient-to-br from-green-50 to-white">
+  <div class="max-w-4xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-[#1F2937] text-center mb-12">
+      Dicas para Educação Financeira
+    </h2>
+    <div class="space-y-8">
+      <div class="flex gap-6 items-start">
+        <div class="text-3xl flex-shrink-0">💡</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Compare antes de decidir</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Não aceite a primeira proposta. Use nossas calculadoras para comparar diferentes bancos,
+            prazos e sistemas de amortização. Uma diferença de 0,5% na taxa pode representar
+            milhares de reais.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-6 items-start">
+        <div class="text-3xl flex-shrink-0">🎯</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Defina metas claras</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Antes de investir ou financiar, saiba exatamente qual seu objetivo e prazo.
+            Investimentos de curto prazo pedem liquidez, enquanto projetos de longo prazo permitem
+            taxas melhores mas com menor flexibilidade.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-6 items-start">
+        <div class="text-3xl flex-shrink-0">📊</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Entenda os juros compostos</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Einstein chamou os juros compostos de "a oitava maravilha do mundo". Quem entende,
+            recebe; quem não entende, paga. Ao investir cedo e regularmente, você faz o tempo
+            trabalhar a seu favor.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-6 items-start">
+        <div class="text-3xl flex-shrink-0">⚖️</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Equilibre dívidas e investimentos</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Se você tem dívidas com juros altos (cartão de crédito, cheque especial), priorize
+            quitá-las antes de investir. A taxa de juros que você paga em dívidas geralmente é maior
+            que qualquer rendimento de investimento seguro.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-6 items-start">
+        <div class="text-3xl flex-shrink-0">🛡️</div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1F2937] mb-2">Monte uma reserva de emergência</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Antes de fazer investimentos de longo prazo ou assumir financiamentos grandes, tenha uma
+            reserva de 6 a 12 meses de suas despesas em aplicações líquidas. Isso evita que você
+            precise vender investimentos no prejuízo ou se endividar em emergências.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Seção: Últimos Artigos -->
+<section class="py-16 xl:px-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#1F2937] mb-4">Conteúdo Educacional</h2>
+      <p class="text-lg text-gray-600">Aprenda mais sobre finanças com nossos artigos e guias</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <article
+        *ngFor="let post of latestPosts$ | async"
+        class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden flex flex-col"
+      >
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center gap-2 mb-4">
+            <span
+              class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
+              >{{ post.category }}</span
+            >
+            <span class="text-gray-400 text-xs">{{ post.date | date: 'dd/MM/yyyy' }}</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-[#1F2937] mb-3 leading-tight">
+            <a [routerLink]="['/blog', post.slug]" class="hover:text-blue-600 transition-colors">
+              {{ post.title }}
+            </a>
+          </h3>
+
+          <p class="text-gray-600 mb-6 flex-1 line-clamp-3 text-sm">
+            {{ post.excerpt }}
+          </p>
+
+          <a
+            [routerLink]="['/blog', post.slug]"
+            class="text-blue-600 font-semibold hover:underline inline-flex items-center mt-auto text-sm"
+          >
+            Ler artigo
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <div class="text-center mt-12">
+      <a
+        routerLink="/blog"
+        class="inline-block rounded-xl border-2 border-blue-600 text-blue-600 px-8 py-3 hover:bg-blue-600 hover:text-white transition-colors font-semibold"
+      >
+        Ver todos os artigos
+      </a>
+    </div>
+  </div>
+</section>
+
+<app-news></app-news>
+
+<!-- Seção FAQ -->
+<section class="py-16 xl:px-20">
+  <div class="max-w-4xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-[#1F2937] text-center mb-12">
+      Perguntas Frequentes
+    </h2>
+    <div class="space-y-6">
+      <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-[#2563EB] transition-colors">
+        <h3 class="text-xl font-bold text-[#1F2937] mb-3">Qual a diferença entre SAC e PRICE?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          No sistema <strong>SAC</strong> (Sistema de Amortização Constante), a amortização é fixa e
+          os juros diminuem a cada mês, resultando em parcelas decrescentes. É vantajoso para quem
+          quer pagar menos juros no total. No sistema <strong>PRICE</strong> (Tabela Price), as
+          parcelas são fixas do início ao fim. É ideal para quem precisa de previsibilidade no
+          orçamento mensal.
+        </p>
+      </div>
+
+      <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-[#2563EB] transition-colors">
+        <h3 class="text-xl font-bold text-[#1F2937] mb-3">
+          Como funciona o Imposto de Renda em investimentos?
+        </h3>
+        <p class="text-gray-700 leading-relaxed">
+          O IR sobre investimentos de renda fixa (CDB, Tesouro Direto) segue uma tabela regressiva:
+          <strong>22,5%</strong> até 180 dias, <strong>20%</strong> de 181 a 360 dias,
+          <strong>17,5%</strong> de 361 a 720 dias, e <strong>15%</strong> acima de 720 dias. Quanto
+          mais tempo você deixar o dinheiro investido, menos imposto pagará.
+        </p>
+      </div>
+
+      <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-[#2563EB] transition-colors">
+        <h3 class="text-xl font-bold text-[#1F2937] mb-3">
+          Vale a pena dar uma entrada maior no financiamento?
+        </h3>
+        <p class="text-gray-700 leading-relaxed">
+          Sim, geralmente vale a pena. Uma entrada maior reduz o valor financiado, diminuindo tanto
+          os juros totais quanto o valor das parcelas. Use nossa calculadora para simular diferentes
+          cenários e ver exatamente quanto economizará.
+        </p>
+      </div>
+
+      <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-[#2563EB] transition-colors">
+        <h3 class="text-xl font-bold text-[#1F2937] mb-3">
+          O que é CDI e como ele afeta meus investimentos?
+        </h3>
+        <p class="text-gray-700 leading-relaxed">
+          O <strong>CDI</strong> (Certificado de Depósito Interbancário) é a taxa de juros que os
+          bancos usam para empréstimos entre si. Ela acompanha de perto a taxa SELIC e serve como
+          referência para investimentos de renda fixa. Quando você vê "120% do CDI", significa que o
+          investimento renderá 20% a mais que a taxa CDI (atualmente cerca de 14,9% ao ano).
+        </p>
+      </div>
+
+      <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-[#2563EB] transition-colors">
+        <h3 class="text-xl font-bold text-[#1F2937] mb-3">
+          Posso confiar nas simulações deste site?
+        </h3>
+        <p class="text-gray-700 leading-relaxed">
+          Sim! Todas as nossas calculadoras usam fórmulas financeiras padrão do mercado e taxas
+          reais atualizadas. No entanto, lembre-se que as simulações são apenas estimativas. Valores
+          finais podem variar conforme taxas administrativas, seguros obrigatórios e condições
+          específicas de cada instituição financeira. Sempre consulte a instituição financeira para
+          proposta formal.
+        </p>
+      </div>
+    </div>
   </div>
 </section>

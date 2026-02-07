@@ -1,0 +1,147 @@
+<section class="space-y-8">
+  <div class="text-center max-w-3xl mx-auto">
+    <h1 class="text-3xl md:text-4xl font-bold text-[#1F2937] mb-4">Calculadora de Juros Compostos</h1>
+    <p class="text-lg text-gray-700">Descubra o poder dos juros compostos e veja seu dinheiro crescer exponencialmente ao longo do tempo</p>
+  </div>
+
+  <!-- Conteúdo educacional -->
+  <div class="bg-gradient-to-br from-blue-50 to-white p-6 md:p-8 rounded-2xl border border-blue-200">
+    <h2 class="text-2xl font-bold text-[#1F2937] mb-4">O que são Juros Compostos?</h2>
+    <p class="text-gray-700 mb-4">
+      Os juros compostos são juros calculados sobre o valor inicial <strong>mais os juros acumulados</strong> dos períodos anteriores. 
+      É o famoso "juros sobre juros", considerado por Albert Einstein como a "oitava maravilha do mundo".
+    </p>
+    <div class="grid md:grid-cols-2 gap-4 mt-6">
+      <div class="bg-white p-4 rounded-xl border border-gray-200">
+        <h3 class="font-bold text-[#2563EB] mb-2">💰 Exemplo Prático</h3>
+        <p class="text-sm text-gray-600">R$ 1.000 a 10% ao ano por 5 anos = <strong class="text-green-600">R$ 1.610,51</strong> (lucro de R$ 610,51)</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-gray-200">
+        <h3 class="font-bold text-[#2563EB] mb-2">📈 Efeito no Tempo</h3>
+        <p class="text-sm text-gray-600">Quanto maior o prazo, maior o efeito exponencial dos juros compostos</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <form class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200 space-y-6" (ngSubmit)="calcular()">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Valor Inicial (Principal)</label>
+        <div class="relative">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-medium">R$</span>
+          <input type="text" appCurrencyMask [(ngModel)]="valorInicial" name="valorInicial" class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-3" placeholder="10.000,00" />
+        </div>
+        <p class="text-xs text-gray-500 mt-1">Quanto você tem hoje para investir</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Aporte Mensal</label>
+        <div class="relative">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 font-medium">R$</span>
+          <input type="text" appCurrencyMask [(ngModel)]="aporteMensal" name="aporteMensal" class="w-full rounded-xl border border-gray-300 pl-12 pr-3 py-3" placeholder="500,00" />
+        </div>
+        <p class="text-xs text-gray-500 mt-1">Valor que você investirá todo mês</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Taxa de Juros Anual (%)</label>
+        <input type="number" step="0.01" [(ngModel)]="taxaAnual" name="taxaAnual" class="w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="Ex: 12.5" />
+        <p class="text-xs text-gray-500 mt-1">CDI atual está em torno de 14,90% a.a.</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Período (meses)</label>
+        <input type="number" [(ngModel)]="periodoMeses" name="periodoMeses" class="w-full rounded-xl border border-gray-300 px-3 py-3" placeholder="Ex: 120 (10 anos)" />
+        <p class="text-xs text-gray-500 mt-1">Quanto tempo você deixará o dinheiro investido</p>
+      </div>
+    </div>
+
+    <button type="submit" class="w-full md:w-auto rounded-xl bg-[#2563EB] text-white px-8 py-3 shadow-md hover:bg-[#1E4FD7] font-semibold transition-colors">
+      Calcular Juros Compostos
+    </button>
+  </form>
+
+  <!-- Resultado -->
+  <div *ngIf="resultado" class="space-y-6">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border-2 border-green-200">
+        <p class="text-sm text-gray-600 mb-1">Valor Final</p>
+        <p class="text-3xl font-bold text-green-600">{{ formatCurrency(resultado.valorFinal) }}</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border-2 border-blue-200">
+        <p class="text-sm text-gray-600 mb-1">Juros Ganhos</p>
+        <p class="text-3xl font-bold text-[#2563EB]">{{ formatCurrency(resultado.jurosGanhos) }}</p>
+      </div>
+      <div class="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border-2 border-gray-200">
+        <p class="text-sm text-gray-600 mb-1">Total Investido</p>
+        <p class="text-3xl font-bold text-[#1F2937]">{{ formatCurrency(resultado.aporteTotal) }}</p>
+      </div>
+    </div>
+
+    <!-- Evolução -->
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200">
+      <h3 class="text-xl font-bold text-[#1F2937] mb-4">Evolução do Investimento</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="text-left p-3 font-semibold text-gray-700">Mês</th>
+              <th class="text-right p-3 font-semibold text-gray-700">Saldo Acumulado</th>
+              <th class="text-right p-3 font-semibold text-gray-700">Juros do Período</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of resultado.evolucaoMensal; let i = index" [class.bg-gray-50]="i % 2 === 0">
+              <td class="p-3 text-gray-900">Mês {{ item.mes }}</td>
+              <td class="p-3 text-right font-semibold text-green-600">{{ formatCurrency(item.saldo) }}</td>
+              <td class="p-3 text-right text-gray-600">{{ formatCurrency(item.juros) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dicas educacionais -->
+  <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-xl">
+    <h3 class="text-lg font-bold text-[#1F2937] mb-3">💡 Dicas para Maximizar Juros Compostos</h3>
+    <ul class="space-y-2 text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-yellow-600 font-bold mt-1">•</span>
+        <span><strong>Comece cedo:</strong> O tempo é seu maior aliado. Quanto antes começar, mais seus juros trabalharão para você.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-yellow-600 font-bold mt-1">•</span>
+        <span><strong>Aportes regulares:</strong> Mesmo valores pequenos mensais fazem grande diferença no longo prazo.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-yellow-600 font-bold mt-1">•</span>
+        <span><strong>Reinvista os rendimentos:</strong> Não retire os juros, deixe-os crescer exponencialmente.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-yellow-600 font-bold mt-1">•</span>
+        <span><strong>Busque boas taxas:</strong> A diferença entre 10% e 14% ao ano pode representar milhares de reais no futuro.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- FAQ -->
+  <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200">
+    <h3 class="text-2xl font-bold text-[#1F2937] mb-6">Perguntas Frequentes</h3>
+    <div class="space-y-4">
+      <div class="border-b border-gray-200 pb-4">
+        <h4 class="font-bold text-gray-900 mb-2">Qual a diferença entre juros simples e compostos?</h4>
+        <p class="text-gray-600 text-sm">Nos juros simples, os juros incidem apenas sobre o valor inicial. Nos compostos, incidem sobre o valor inicial + juros acumulados, gerando crescimento exponencial.</p>
+      </div>
+      <div class="border-b border-gray-200 pb-4">
+        <h4 class="font-bold text-gray-900 mb-2">Como escolher um bom investimento com juros compostos?</h4>
+        <p class="text-gray-600 text-sm">Busque investimentos com boa rentabilidade (próxima ao CDI), baixo risco e que permitam aportes regulares, como CDBs, Tesouro Direto e fundos de renda fixa.</p>
+      </div>
+      <div class="pb-4">
+        <h4 class="font-bold text-gray-900 mb-2">Quanto tempo leva para dobrar meu dinheiro?</h4>
+        <p class="text-gray-600 text-sm">Use a "Regra de 72": divida 72 pela taxa de juros anual. Por exemplo, a 12% ao ano, leva cerca de 6 anos (72 ÷ 12 = 6).</p>
+      </div>
+    </div>
+  </div>
+</section>
